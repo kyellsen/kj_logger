@@ -57,6 +57,9 @@ class LogManager:
             self.safe_logs_to_file = save_logs_to_file
         self.configure_logging()
 
+        logger = get_logger(__name__)
+        logger.info(f"{self} initialized - update_config! Code: 000")
+
 
 class ColorfulFormatter(logging.Formatter):
     """ Custom formatter to add color to logging output. """
@@ -77,11 +80,16 @@ class ColorfulFormatter(logging.Formatter):
         record.levelname = f"{color_code}{record.levelname}{self.RESET_CODE}"
         return super().format(record)
 
+def get_logger(name: str) -> logging.Logger:
+    """ Retrieves a logger with the specified name. """
+    return logging.getLogger(name)
 
 # Instantiate LogManager with default configuration
 LOG_MANAGER = LogManager(str(DEFAULT_WORKING_DIRECTORY), DEFAULT_LOG_LEVEL, DEFAULT_SAFE_LOGS_TO_FILE)
 
 
-def get_logger(name: str) -> logging.Logger:
-    """ Retrieves a logger with the specified name. """
-    return logging.getLogger(name)
+
+
+
+
+

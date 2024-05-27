@@ -1,2 +1,4 @@
 .idea/
 kj_logger.egg-info/
+build/
+dist/

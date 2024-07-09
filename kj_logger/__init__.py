@@ -45,6 +45,7 @@ class LogManager:
         for handler in logging.root.handlers[:]:
             logging.root.removeHandler(handler)
         logging.basicConfig(level=self.log_level, handlers=handlers)
+        self.set_matplotlib_logging_level()
 
     def update_config(self, working_directory=None, log_level=None, save_logs_to_file=None):
         """ Updates the logging configuration. """
@@ -59,6 +60,11 @@ class LogManager:
 
         logger = get_logger(__name__)
         logger.info(f"{self} initialized - update_config! Code: 000")
+
+    @staticmethod
+    def set_matplotlib_logging_level():
+        """ Set matplotlib logging level to WARNING to suppress debug/info logs. """
+        logging.getLogger('matplotlib').setLevel(logging.INFO)
 
 
 class ColorfulFormatter(logging.Formatter):
@@ -80,16 +86,11 @@ class ColorfulFormatter(logging.Formatter):
         record.levelname = f"{color_code}{record.levelname}{self.RESET_CODE}"
         return super().format(record)
 
+
 def get_logger(name: str) -> logging.Logger:
     """ Retrieves a logger with the specified name. """
     return logging.getLogger(name)
 
+
 # Instantiate LogManager with default configuration
 LOG_MANAGER = LogManager(str(DEFAULT_WORKING_DIRECTORY), DEFAULT_LOG_LEVEL, DEFAULT_SAFE_LOGS_TO_FILE)
-
-
-
-
-
-
-

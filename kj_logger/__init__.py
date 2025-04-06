@@ -4,7 +4,7 @@ from datetime import datetime
 
 # Default configuration
 DEFAULT_WORKING_DIRECTORY = Path(r"C:\kyellsen\005_Projekte\Z_DEFAUT_LOGGER")
-DEFAULT_LOG_LEVEL = "Error"
+DEFAULT_LOG_LEVEL = "INFO"
 DEFAULT_SAFE_LOGS_TO_FILE = False
 
 
